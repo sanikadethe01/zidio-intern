@@ -1,0 +1,40 @@
+package com.zidio.controller;
+
+import com.zidio.model.User;
+import com.zidio.service.UserService;
+import com.zidio.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User u) {
+        // Default role = STUDENT
+        if (u.getRole() == null) u.setRole("STUDENT");
+        if (userRepository.findByEmail(u.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
+        User saved = userService.register(u);
+        return ResponseEntity.ok(saved);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
+        return userService.login(req.getEmail(), req.getPassword())
+                .map(u -> ResponseEntity.ok(u))
+                .orElseGet(() -> ResponseEntity.status(401).body("Invalid credentials"));
+    }
+
+    // Inner record for login payload
+    static record LoginRequest(String email, String password) {}
+}

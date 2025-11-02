@@ -1,0 +1,25 @@
+package com.zidio.controller;
+
+import com.zidio.model.User;
+import com.zidio.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/admin")
+@RequiredArgsConstructor
+public class AdminController {
+  private final UserRepository userRepository;
+
+  @GetMapping("/users")
+  public List<User> allUsers() {
+    return userRepository.findAll();
+  }
+
+  @PostMapping("/users/{id}/block")
+  public String block(@PathVariable Long id) {
+    // simple simulation
+    return "User " + id + " blocked (simulate)";
+  }
+}

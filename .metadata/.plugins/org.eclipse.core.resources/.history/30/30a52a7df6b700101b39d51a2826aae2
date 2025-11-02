@@ -1,0 +1,30 @@
+package com.zidio.controller;
+
+import com.zidio.model.Job;
+import com.zidio.repository.JobRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/jobs")
+@RequiredArgsConstructor
+public class JobController {
+
+    private final JobRepository jobRepository;
+
+    // ✅ Get all jobs
+    @GetMapping("/all")
+    public List<Job> getAllJobs() {
+        return jobRepository.findAll();
+    }
+
+    // ✅ Add new job
+    @PostMapping("/add")
+    public ResponseEntity<?> addJob(@RequestBody Job job) {
+        Job saved = jobRepository.save(job);
+        return ResponseEntity.ok(saved);
+    }
+}

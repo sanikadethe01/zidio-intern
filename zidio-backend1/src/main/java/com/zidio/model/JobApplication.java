@@ -1,0 +1,85 @@
+package com.zidio.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "applications")
+public class JobApplication {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long jobId;
+    private Long studentId;
+    private String studentName;
+    private String status; // e.g., APPLIED, SHORTLISTED, SELECTED, REJECTED
+
+    public JobApplication() {}
+
+    public JobApplication(Long id, Long jobId, Long studentId, String studentName, String status) {
+        this.id = id;
+        this.jobId = jobId;
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.status = status;
+    }
+
+    // ✅ Builder pattern added here
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private Long jobId;
+        private Long studentId;
+        private String studentName;
+        private String status;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder jobId(Long jobId) {
+            this.jobId = jobId;
+            return this;
+        }
+
+        public Builder studentId(Long studentId) {
+            this.studentId = studentId;
+            return this;
+        }
+
+        public Builder studentName(String studentName) {
+            this.studentName = studentName;
+            return this;
+        }
+
+        public Builder status(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public JobApplication build() {
+            return new JobApplication(id, jobId, studentId, studentName, status);
+        }
+    }
+
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getJobId() { return jobId; }
+    public void setJobId(Long jobId) { this.jobId = jobId; }
+
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
+
+    public String getStudentName() { return studentName; }
+    public void setStudentName(String studentName) { this.studentName = studentName; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+}

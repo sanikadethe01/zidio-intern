@@ -1,0 +1,29 @@
+package com.zidio.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.zidio.model.JobApplication;
+import com.zidio.repository.JobApplicationRepository;
+
+@Service
+public class JobApplicationService {
+
+    @Autowired
+    private JobApplicationRepository jobApplicationRepository;
+
+    // Apply for a job
+    public JobApplication applyForJob(JobApplication jobApplication) {
+        return jobApplicationRepository.save(jobApplication);
+    }
+
+    // Get all applications for a particular job
+    public List<JobApplication> getApplicationsByJobId(Long jobId) {
+        return jobApplicationRepository.findByJobId(jobId);
+    }
+
+    // Get all applications submitted by a particular user/student
+    public List<JobApplication> getApplicationsByUserId(Long userId) {
+        return jobApplicationRepository.findByStudentId(userId);
+    }
+}

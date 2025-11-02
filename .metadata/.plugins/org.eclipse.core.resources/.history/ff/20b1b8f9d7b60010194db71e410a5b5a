@@ -1,0 +1,31 @@
+package com.zidio.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+// Marks this as a JPA entity (table in DB)
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @Column(unique = true)
+    private String email;
+
+    private String password;
+
+    // Possible values: STUDENT, RECRUITER, ADMIN
+    private String role;
+
+    // Optional: will hold the link to uploaded resume later
+    private String resumeUrl;
+}

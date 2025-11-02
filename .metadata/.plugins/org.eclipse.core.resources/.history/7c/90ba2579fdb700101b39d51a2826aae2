@@ -1,0 +1,5 @@
+package com.zidio.config;
+
+public class SecurityConfig {
+
+}

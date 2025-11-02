@@ -1,0 +1,25 @@
+# Eclipse
+.metadata/
+*.tmp
+*.bak
+*~.tmp
+*.swp
+.settings/
+.classpath
+.project
+
+# Maven / Java
+target/
+*.log
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Optional: local workspace config
+/.vscode/

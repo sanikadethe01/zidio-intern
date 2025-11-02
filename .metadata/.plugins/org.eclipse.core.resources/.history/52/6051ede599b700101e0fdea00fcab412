@@ -1,0 +1,42 @@
+package com.zidio.controller;
+
+import com.zidio.model.Job;
+import com.zidio.repository.JobRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/jobs")
+public class JobController {
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @GetMapping
+    public List<Job> all() {
+        return jobRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Job> get(@PathVariable Long id) {
+        return jobRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestHeader(value = "X-USER-ID", required = false) Long userId,
+                                    @RequestBody Job job) {
+        // Assume recruiter in this demo
+        Job saved = jobRepository.save(job);
+        return ResponseEntity.ok(saved);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        jobRepository.deleteById(id);
+        return ResponseEntity.ok("Deleted");
+    }
+}
