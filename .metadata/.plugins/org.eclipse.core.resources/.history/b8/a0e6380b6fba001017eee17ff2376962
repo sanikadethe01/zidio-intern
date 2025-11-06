@@ -1,0 +1,39 @@
+package com.zidio.service;
+
+import com.zidio.model.User;
+import com.zidio.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // ✅ Register a new user
+    public User register(User user) {
+        // Prevent duplicate email registration at service layer too
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new RuntimeException("User already exists with this email.");
+        }
+        return userRepository.save(user);
+    }
+
+    // ✅ Authenticate user (login)
+    public User login(String email, String password) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+
+        // Check if user exists and password matches
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null; // Invalid credentials
+    }
+}

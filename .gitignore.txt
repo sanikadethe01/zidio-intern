@@ -1,0 +1,11 @@
+# Ignore everything
+/*
+
+# Allow only these folders
+!/outputs/
+!/zidio-backend/
+!/zidio-backend1/
+!/zidio-frontend/
+
+# Also allow gitignore itself
+!.gitignore

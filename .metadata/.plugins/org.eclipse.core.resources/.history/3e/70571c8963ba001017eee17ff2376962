@@ -1,0 +1,17 @@
+package com.zidio.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TestController {
+	
+	public TestController() {
+	    System.out.println("✅ TestController loaded");
+	}
+
+    @GetMapping("/test")
+    public String test() {
+        return "✅ Controller scan is working!";
+    }
+}

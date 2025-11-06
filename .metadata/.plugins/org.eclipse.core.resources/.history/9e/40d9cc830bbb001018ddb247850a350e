@@ -1,0 +1,13 @@
+package com.zidio;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+@SpringBootApplication
+//@ComponentScan(basePackages = {"com.zidio.controller", "com.zidio.repository", "com.zidio.model", "com.zidio.config"})
+public class ZidioBackend1Application {
+    public static void main(String[] args) {
+        SpringApplication.run(ZidioBackend1Application.class, args);
+    }
+}
