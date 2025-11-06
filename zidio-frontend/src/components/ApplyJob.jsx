@@ -11,9 +11,8 @@ function ApplyJob() {
       alert("Please login first!");
       return;
     }
-    axios
-      .post(`http://localhost:8080/api/applications/apply?jobId=${jobId}`, null, {
-        headers: { "X-USER-ID": user.id },
+    axios.post(`/api/applications/apply?jobId=${jobId}`, null, { 
+      headers: { "X-USER-ID": user.id },
       })
       .then(() => alert("Application submitted!"))
       .catch(() => alert("Error applying for job"));

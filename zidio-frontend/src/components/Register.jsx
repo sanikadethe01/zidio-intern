@@ -15,22 +15,23 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/auth/register", user)
+    axios.post("/api/auth/register", user)
       .then(() => alert("Registered successfully!"))
       .catch(() => alert("Error during registration"));
   };
 
   return (
+    <center>
     <div>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange} /><br />
-        <input name="email" placeholder="Email" onChange={handleChange} /><br />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br />
+        <input name="name" placeholder="Name" onChange={handleChange} /> <br /><br />
+        <input name="email" placeholder="Email" onChange={handleChange} /><br /><br />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br /> <br />
         <button type="submit">Register</button>
       </form>
     </div>
+    </center>
   );
 }
 

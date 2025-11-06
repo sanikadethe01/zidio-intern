@@ -18,25 +18,27 @@ function AddJob() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/jobs/add", job)
+    axios.post("/api/jobs/add", job)
       .then(() => alert("Job added successfully!"))
-      .catch(() => alert("Error adding job."));
+      .catch(() => alert("⚠️ Error adding job."));
   };
 
   return (
+
+    <center>
     <div>
-      <h2>Add Job</h2>
+      <h2>Add New Job</h2>
       <form onSubmit={handleSubmit}>
-        <input name="title" placeholder="Title" onChange={handleChange} /><br />
-        <input name="company" placeholder="Company" onChange={handleChange} /><br />
-        <input name="location" placeholder="Location" onChange={handleChange} /><br />
-        <input name="description" placeholder="Description" onChange={handleChange} /><br />
-        <input name="type" placeholder="Type" onChange={handleChange} /><br />
-        <input name="salary" placeholder="Salary" onChange={handleChange} /><br />
+        <input name="title" placeholder="Title" onChange={handleChange} /><br /><br />
+        <input name="company" placeholder="Company" onChange={handleChange} /><br /><br />
+        <input name="location" placeholder="Location" onChange={handleChange} /><br /><br />
+        <input name="description" placeholder="Description" onChange={handleChange} /><br /><br />
+        <input name="type" placeholder="Type" onChange={handleChange} /><br /><br />
+        <input name="salary" placeholder="Salary" onChange={handleChange} /><br /><br />
         <button type="submit">Add Job</button>
       </form>
     </div>
+    </center>
   );
 }
 

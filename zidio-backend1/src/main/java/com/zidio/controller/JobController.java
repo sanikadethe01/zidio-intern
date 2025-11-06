@@ -10,26 +10,33 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class JobController {
 
     @Autowired
     private JobRepository jobRepository;
 
-    // ✅ POST: Add a new job
+    // 🔹 Test API
+    @GetMapping("/test")
+    public String testApi() {
+        return "✅ JobController is working fine!";
+    }
+
+
+    // 🔹 Add new job
     @PostMapping("/add")
     public ResponseEntity<Job> addJob(@RequestBody Job job) {
         Job savedJob = jobRepository.save(job);
         return ResponseEntity.ok(savedJob);
     }
 
-    // ✅ GET: List all jobs
+    // 🔹 Get all jobs
     @GetMapping("/all")
     public ResponseEntity<List<Job>> getAllJobs() {
         return ResponseEntity.ok(jobRepository.findAll());
     }
 
-    // ✅ GET: Get job by ID
+    // 🔹 Get job by ID
     @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable Long id) {
         return jobRepository.findById(id)

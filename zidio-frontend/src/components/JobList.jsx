@@ -6,13 +6,13 @@ function JobList() {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/jobs/all")
+    axios.get("/api/jobs/all")
       .then((res) => setJobs(res.data))
       .catch((err) => console.error("Error loading jobs:", err));
   }, []);
 
   return (
+    <center>
     <div>
       <h2>Job Listings</h2>
       {jobs.length === 0 ? (
@@ -23,12 +23,13 @@ function JobList() {
             <li key={job.id}>
               <strong>{job.title}</strong> – {job.company} ({job.location})
               <br />
-              <Link to={`/apply/${job.id}`}>Apply</Link>
+              <Link to={`/apply/${job.id}`}>Apply</Link><br></br>
             </li>
           ))}
         </ul>
       )}
     </div>
+    </center>
   );
 }
 
